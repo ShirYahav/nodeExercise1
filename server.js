@@ -22,14 +22,36 @@ app.get('/', (req , res)=>{
 })
 
 //17
-app.get('/:year', (req, res)=>{
-    const year = req.params.year
-    res.send('you were born in the year of ' + year)
-})
+// app.get('/:year', (req, res)=>{
+//     const year = req.params.year
+//     res.send('you were born in the year of ' + year)
+// })
 
 //18
+const personsArray = [];
 app.post('/persons', (req, res)=>{
-    console.log(req.body)
+    personsArray.push(req.body)
+    console.log('post', personsArray)
+    res.send(personsArray)
 });
+
+app.get('/persons/:id', (req, res) => {
+    console.log(req.params.id)
+    console.log('personsArray', personsArray)
+
+    const foundPerson = personsArray.find((person) => { person.id === req.params.id })
+    if(!foundPerson){
+        return res.send('This person doesnt exist')
+    }
+    res.send(foundPerson)
+    
+    // personsArray.find((obj) => { 
+    //    if(obj.id === req.params.id){
+    //        return res.send(obj);
+    //    } else {
+    //        return res.send('This person doesnt exist')
+    //    }
+    // })
+})
 
 app.listen(3000);
