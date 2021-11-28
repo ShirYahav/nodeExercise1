@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/action_page.php">
+        <label for="firstName">First name:</label><br>
+        <input type="text" id="firstName" name="firstName"><br>
+        <label for="lastName">Last name:</label><br>
+        <input type="text" id="lastName" name="lastName"><br>
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id"><br><br>
+        <button type="button" class="post" onclick="postPerson()">post</button>
+    </form> 
+    
+    <script>
+        const firstName = document.querySelector('#firstName')
+        const lastName = document.querySelector('#lastName')
+        const id = document.querySelector('#id')
+        const post = document.querySelector('.post')
+        
+        const person = {
+            firstName : firstName.value,
+            lastName : lastName.value,
+            id : id.value 
+        }
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(person)
+        };
+
+        const postPerson = () => {
+            console.log(person)
+            fetch('/persons', options)
+        };
+          
+    </script>
+</body>
+</html>
