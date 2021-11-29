@@ -7,14 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <form method ="POST" action="/persons" >
+    <form>
         <label for="firstName">First name:</label><br>
         <input type="text" id="firstName" name="firstName"/><br>
         <label for="lastName">Last name:</label><br>
         <input type="text" id="lastName" name="lastName"/><br>
         <label for="id">ID:</label><br>
         <input type="text" id="id" name="id"/><br><br>
-        <input type="submit" value="post"id="post"/>
+        <input type="button" value="post"id="post"/>
     </form> 
     
     <script>
@@ -23,12 +23,13 @@
         const id = document.querySelector('#id')
         const post = document.querySelector('#post')
         
-        const person = {
+        const postPerson = () => {
+            const person = {
             firstName : firstName.value,
             lastName : lastName.value,
             id : id.value 
-        }
-        
+        };
+
         const options = {
             method: 'POST',
             headers: {
@@ -36,9 +37,7 @@
             },
             body: JSON.stringify(person)
         };
-        
-        
-        const postPerson = () => {
+
             fetch('/persons', options)
         };
         
